@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
-    <header class="container mx-auto px-4">
+    <header class="container mx-auto px-4 md:px-0">
         <!-- navbar -->
         <nav class="flex  gap-4 justify-between items-center border-b border-b-gray-300 py-5">
             <!-- logo -->
@@ -19,7 +19,7 @@
             </div>
             <!-- search box -->
             <div>
-                <input type="text" placeholder="Search your videos" class="input md:input-lg input-sm placeholder:text-xs md:placeholder:text-base" />
+                <input id="search-input" type="text" placeholder="Search your videos" class="input md:input-lg input-sm placeholder:text-xs md:placeholder:text-base" />
             </div>
             <!-- blogs -->
             <div class="md:block hidden">
@@ -29,12 +29,15 @@
         <!-- catagoryes -->
         <section class="flex justify-center py-7">
             <div id="catagory" class="flex justify-center gap-3">
-                <div><button class="btn btn-sm md:btn-md text-white bg-[#FF1F3D]">All</button></div>
+                <div><button onclick="getVideos()" class="btn btn-sm md:btn-md text-white bg-[#FF1F3D]">All</button></div>
             </div>
         </section>
     </header>
-    <main>
-
+    <main class="container mx-auto px-4">
+        <!-- cards -->
+         <div id="card-container" class="grid gap-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-1">
+            
+         </div>
     </main>
 
     <script src="scripts/index.js"></script>
