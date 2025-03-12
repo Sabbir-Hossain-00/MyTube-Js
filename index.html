@@ -10,6 +10,33 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
-    
+    <header class="container mx-auto px-4">
+        <!-- navbar -->
+        <nav class="flex  gap-4 justify-between items-center border-b border-b-gray-300 py-5">
+            <!-- logo -->
+            <div>
+                <img class="md:w-[80%] w-[50%]" src="assests/Logo.png" alt="">
+            </div>
+            <!-- search box -->
+            <div>
+                <input type="text" placeholder="Search your videos" class="input md:input-lg input-sm placeholder:text-xs md:placeholder:text-base" />
+            </div>
+            <!-- blogs -->
+            <div class="md:block hidden">
+                <button class="btn bg-[#FF1F3D] text-white">Blogs</button>
+            </div>
+        </nav>
+        <!-- catagoryes -->
+        <section class="flex justify-center py-7">
+            <div id="catagory" class="flex justify-center gap-3">
+                <div><button class="btn btn-sm md:btn-md text-white bg-[#FF1F3D]">All</button></div>
+            </div>
+        </section>
+    </header>
+    <main>
+
+    </main>
+
+    <script src="scripts/index.js"></script>
 </body>
 </html>
