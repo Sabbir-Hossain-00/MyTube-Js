@@ -28,6 +28,28 @@ const showVerified = (value)=>{
    }
 }
 
+const getTime = (time)=>{
+  const years = parseInt(time / 31104000);
+  const hours =  parseInt(time / 3600) ;
+  const minutes = parseInt((time % 3600) / 60) ;
+  let postedTime = `${years}day ${hours}hrs ${minutes}min ago`;
+  if(years === 0){
+    postedTime = `${hours}hrs ${minutes}min ago`
+  }else if(years){
+     postedTime = `${years} year ago`
+  }
+  if(time){
+    return postedTime ;
+  }else{
+    return " "
+  }
+
+  
+}
+
+
+
+
 
 
 const getCatagory = async ()=>{
@@ -52,14 +74,15 @@ const getVideos = async (value="")=>{
 }
 
 
-const catagoryVideo = async (id )=>{
-  console.log()
+const getCatagoryVideo = async (id )=>{
   const catVideoUrl = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
   showLoader()
   const response = await fetch(catVideoUrl);
   const data = await response.json();
   const {category} = data ;
   displayVideo(category);
+  displayDrawing(category);
+ 
   hideLoder();
 }
 
@@ -69,6 +92,7 @@ const getDetails = async(id)=>{
  const data = await response.json()
  displayDetails(data.video)
 }
+
 
 
 
@@ -90,7 +114,7 @@ const displayCatagory = (catagories)=>{
     const tBtn = e.target ;
     removeActive();
     tBtn.classList.add("active");
-    catagoryVideo(`${category_id}`);
+    getCatagoryVideo(`${category_id}`);
    });
 
    
@@ -101,7 +125,7 @@ const displayVideo = (videos)=>{
   const cardContainer = document.getElementById("card-container");
     cardContainer.innerHTML = "";
   for(const video of videos){
-    const {thumbnail , title , authors , others ,video_id} = video ;
+    const {thumbnail , title , authors , others ,video_id } = video ;
     const [author] = authors ;
     const {profile_picture , profile_name , verified} = author ;
     const newCard = document.createElement("div");
@@ -111,7 +135,7 @@ const displayVideo = (videos)=>{
                   <img 
                     class="w-full h-[30vh] md:h-[20vh] xl:h-[30vh]"
                     src="${thumbnail}" />
-                    <span class="absolute bottom-2 right-2 text-gray-700 text-sm">3hrs 56 min ago</span>
+                    <span class="absolute bottom-2 right-2 text-white font-semibold text-sm">${getTime(others.posted_date)}</span>
                 </figure>
                 <div class=" mt-3 flex justify-start items-start gap-3">
                     <div class="avatar mt-1">
@@ -129,7 +153,7 @@ const displayVideo = (videos)=>{
                             
                            
                         </div>
-                        <p class="text-sm text-gray-600">${others.views}</p>
+                        <p class="text-sm text-gray-600">${others.views} views</p>
                     </div>
                   
                 </div>
@@ -164,6 +188,20 @@ const displayDetails = (dtls)=>{
   `
 }
 
+const displayDrawing = (category)=>{
+
+  if(category.length < 1){
+    const drawContainer = document.getElementById("draw");
+    drawContainer.innerHTML = `
+       <div class="flex justify-center items-center mt-10  gap-4 flex-col">
+           <img src="assests/Icon.png" alt="">
+           <h1 class="text-3xl font-bold text-red-600">There are no videos</h1>
+       </div>
+    `
+   }else{
+     document.getElementById("draw").innerHTML = "";
+   }
+}
 
 
 getCatagory();
