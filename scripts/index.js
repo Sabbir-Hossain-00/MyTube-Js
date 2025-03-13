@@ -1,7 +1,6 @@
 
 const removeActive =()=>{
   const isActive = document.querySelectorAll(".active");
-  console.log(isActive);
   for(const act of isActive){
     act.classList.remove("active")
   }
@@ -20,6 +19,8 @@ const hideLoder = ()=>{
   loadSpiner.classList.add("load");
   cardHide.classList.remove("card-hide");
 }
+
+
 
 
 const getCatagory = async ()=>{
@@ -55,11 +56,17 @@ const catagoryVideo = async (id )=>{
   hideLoder();
 }
 
+const getDetails = async(id)=>{
+ const detailsUrl = `https://openapi.programming-hero.com/api/phero-tube/video/${id}`
+ const response = await fetch(detailsUrl);
+ const data = await response.json()
+ displayDetails(data.video)
+}
 
 
 
-showLoader()
-hideLoder();
+
+
 
 const displayCatagory = (catagories)=>{
   const catagoryButtons = document.getElementById("catagory");
@@ -87,7 +94,7 @@ const displayVideo = (videos)=>{
   const cardContainer = document.getElementById("card-container");
     cardContainer.innerHTML = "";
   for(const video of videos){
-    const {thumbnail , title , authors , others} = video ;
+    const {thumbnail , title , authors , others ,video_id} = video ;
     const [author] = authors ;
     const {profile_picture , profile_name , verified} = author ;
   
@@ -120,16 +127,34 @@ const displayVideo = (videos)=>{
                   
                 </div>
                 <div class="card-actions ">
-                    <button class="btn btn-primary w-full mt-4">View Details</button>
+                    <button onclick="getDetails('${video_id}')" class="btn btn-primary w-full mt-4">View Details</button>
                   </div>
               </div>
     `
     cardContainer.append(newCard);
+
+ 
   }
   
 }
 
+const displayDetails = (dtls)=>{
 
+  document.getElementById("view_detls").showModal();
+  document.getElementById("details-container").innerHTML = `
+   <div class="card bg-base-100 image-full  shadow-sm">
+  <figure>
+    <img
+      src="${dtls.thumbnail}" />
+  </figure>
+  <div class="card-body">
+    <h2 class="card-title">${dtls.title}</h2>
+    <p>${dtls.description
+    }</p>
+  </div>
+</div>
+  `
+}
 
 
 
