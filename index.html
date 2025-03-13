@@ -8,6 +8,13 @@
     <!-- DaisyUi cdn-->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <style>
+        .active{
+            background-color: red;
+            color: white;
+        }
+    </style>
     
 </head>
 <body>
@@ -30,7 +37,7 @@
         <!-- catagoryes -->
         <section class="flex justify-center py-7">
             <div id="catagory" class="flex justify-center gap-3">
-                <div><button onclick="getVideos()" class="btn btn-sm md:btn-md text-white bg-[#FF1F3D]">All</button></div>
+                <div><button id="btn-all" onclick="getVideos()" class=" catBtn btn btn-sm md:btn-md ">All</button></div>
             </div>
         </section>
     </header>

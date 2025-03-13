@@ -1,5 +1,15 @@
-const catagoryUrl = `https://openapi.programming-hero.com/api/phero-tube/categories`;
+
+const removeActive =()=>{
+  const isActive = document.querySelectorAll(".active");
+  console.log(isActive);
+  for(const act of isActive){
+    act.classList.remove("active")
+  }
+}
+
+
 const getCatagory = async ()=>{
+    const catagoryUrl = `https://openapi.programming-hero.com/api/phero-tube/categories`;
     const response = await fetch(catagoryUrl);
     const data = await response.json()
     const {categories} = data ;
@@ -12,6 +22,9 @@ const getVideos = async (value="")=>{
     const response = await fetch(videoUrl);
     const data = await response.json()
     const {videos} = data ;
+
+    removeActive()
+    document.getElementById("btn-all").classList.add("active");
     displayVideo(videos);
     
 }
@@ -32,14 +45,23 @@ const catagoryVideo = async (id )=>{
 
 
 const displayCatagory = (catagories)=>{
-  const catBtn = document.getElementById("catagory");
+  const catagoryButtons = document.getElementById("catagory");
   for(const cat of catagories){
    const {category_id , category} = cat;
    const newDiv = document.createElement("div");
    newDiv.innerHTML = `
-   <button  onclick = "catagoryVideo('${category_id}')" class="btn btn-sm md:btn-md  hover:bg-[#FF1F3D] hover:text-white">${category}</button>
+   <button  class="catBTn btn btn-sm md:btn-md  hover:bg-[#FF1F3D] hover:text-white">${category}</button>
    `;
-   catBtn.append(newDiv);
+   catagoryButtons.append(newDiv);
+   const catagoryBtn = newDiv.querySelector(".catBTn");
+
+   catagoryBtn.addEventListener("click",(e)=>{
+    const tBtn = e.target ;
+    removeActive();
+    tBtn.classList.add("active");
+    catagoryVideo(`${category_id}`);
+   });
+
    
   }
 }
