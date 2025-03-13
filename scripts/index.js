@@ -20,6 +20,13 @@ const hideLoder = ()=>{
   cardHide.classList.remove("card-hide");
 }
 
+const showVerified = (value)=>{
+   if(value){
+     return `<img class="w-3" src="assests/verified-badge-profile-icon-png.webp">`
+   }else{
+    return " "
+   }
+}
 
 
 
@@ -97,7 +104,6 @@ const displayVideo = (videos)=>{
     const {thumbnail , title , authors , others ,video_id} = video ;
     const [author] = authors ;
     const {profile_picture , profile_name , verified} = author ;
-  
     const newCard = document.createElement("div");
     newCard.innerHTML = `
     <div class="card bg-base-100 ">
@@ -118,7 +124,8 @@ const displayVideo = (videos)=>{
                         <div class="flex justify-start items-center gap-2 ">
                             <p class="text-sm text-gray-600">${profile_name}</p>
                             
-                             <img class="w-4" src="assests/verified-badge-profile-icon-png.webp" alt="">
+                            
+                             ${showVerified(verified)}
                             
                            
                         </div>
@@ -127,11 +134,12 @@ const displayVideo = (videos)=>{
                   
                 </div>
                 <div class="card-actions ">
-                    <button onclick="getDetails('${video_id}')" class="btn btn-primary w-full mt-4">View Details</button>
+                    <button onclick="getDetails('${video_id}')" class="btn w-full mt-4">View Details</button>
                   </div>
               </div>
     `
     cardContainer.append(newCard);
+    showVerified(verified);
 
  
   }
@@ -162,4 +170,4 @@ getCatagory();
 getVideos();
 document.getElementById("search-input").addEventListener("keyup",(e)=>{
   getVideos(e.target.value);
-})
+});

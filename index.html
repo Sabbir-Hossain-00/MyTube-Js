@@ -43,7 +43,7 @@
         <!-- catagoryes -->
         <section class="flex justify-center py-7">
             <div id="catagory" class="flex justify-center gap-3">
-                <div><button id="btn-all" onclick="getVideos()" class=" catBtn btn btn-sm md:btn-md ">All</button></div>
+                <div><button id="btn-all" onclick="getVideos()" class=" catBtn btn btn-sm md:btn-md hover:bg-red-500 ">All</button></div>
             </div>
         </section>
     </header>
@@ -52,14 +52,13 @@
          <div id="card-container" class="card-hide grid gap-5 lg:grid-cols-4 md:grid-cols-3 grid-cols-1">
             
          </div>
-         <!-- loader -->
+        <!-- loader -->
          <div id="loading-spinner" class="load h-[70vh] text-center flex items-center justify-center">
             <span class="loading  loading-spinner text-accent"></span>
          </div>
-         <!-- modal -->
-          <!-- Open the modal using ID.showModal() method -->
-         
-            <dialog id="view_detls" class="modal">
+        <!-- modal -->
+        <!-- Open the modal using ID.showModal() method -->
+        <dialog id="view_detls" class="modal">
                 <div  class="modal-box">
                   <div id="details-container">
 
@@ -71,7 +70,7 @@
                     </form>
                   </div>
                 </div>
-            </dialog>
+        </dialog>
           
         
     </main>
