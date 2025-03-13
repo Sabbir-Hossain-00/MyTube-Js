@@ -7,9 +7,7 @@ const getCatagory = async ()=>{
 }
 
 
-
-
-const getVideos = async (value)=>{
+const getVideos = async (value="")=>{
   const videoUrl = `https://openapi.programming-hero.com/api/phero-tube/videos?title=${value}`;
     const response = await fetch(videoUrl);
     const data = await response.json()
@@ -19,34 +17,30 @@ const getVideos = async (value)=>{
 }
 
 
-
-const catagoryVideo = async (id)=>{
+const catagoryVideo = async (id )=>{
+  console.log()
   const catVideoUrl = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
   const response = await fetch(catVideoUrl);
   const data = await response.json();
-  console.log(data);
   const {category} = data ;
   displayVideo(category);
 }
 
-// const getSearchVideo = async (value)=>{
-//   const searchUrl = `https://openapi.programming-hero.com/api/phero-tube/videos?title=${value}`;
-//   const response = await fetch(searchUrl);
-//   const data = await response.json();
-//   const {videos} = data ;
-//   displayVideo(videos);
-// }
+
+
 
 
 
 const displayCatagory = (catagories)=>{
+  const catBtn = document.getElementById("catagory");
   for(const cat of catagories){
    const {category_id , category} = cat;
    const newDiv = document.createElement("div");
    newDiv.innerHTML = `
-   <button onclick = "catagoryVideo('${category_id}')" class="btn btn-sm md:btn-md  hover:bg-[#FF1F3D] hover:text-white">${category}</button>
+   <button  onclick = "catagoryVideo('${category_id}')" class="btn btn-sm md:btn-md  hover:bg-[#FF1F3D] hover:text-white">${category}</button>
    `;
-   document.getElementById("catagory").append(newDiv)
+   catBtn.append(newDiv);
+   
   }
 }
 
@@ -74,7 +68,7 @@ const displayVideo = (videos)=>{
                         </div>
                       </div>
                     <div class="space-y-2">
-                        <h2 class="card-title md:text-xl">${title}</h2> 
+                        <h2 class="card-title md:text-lg">${title}</h2> 
                         <div class="flex justify-start items-center gap-2 ">
                             <p class="text-sm text-gray-600">${profile_name}</p>
                             
