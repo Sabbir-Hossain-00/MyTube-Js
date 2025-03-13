@@ -7,6 +7,20 @@ const removeActive =()=>{
   }
 }
 
+const showLoader = ()=>{
+  const loadSpiner = document.getElementById("loading-spinner");
+  const cardHide = document.getElementById("card-container");
+  loadSpiner.classList.remove("load");
+  cardHide.classList.add("card-hide");
+}
+
+const hideLoder = ()=>{
+  const loadSpiner = document.getElementById("loading-spinner");
+  const cardHide = document.getElementById("card-container");
+  loadSpiner.classList.add("load");
+  cardHide.classList.remove("card-hide");
+}
+
 
 const getCatagory = async ()=>{
     const catagoryUrl = `https://openapi.programming-hero.com/api/phero-tube/categories`;
@@ -19,30 +33,33 @@ const getCatagory = async ()=>{
 
 const getVideos = async (value="")=>{
   const videoUrl = `https://openapi.programming-hero.com/api/phero-tube/videos?title=${value}`;
+  showLoader();
     const response = await fetch(videoUrl);
     const data = await response.json()
     const {videos} = data ;
-
     removeActive()
     document.getElementById("btn-all").classList.add("active");
     displayVideo(videos);
-    
+    hideLoder();
 }
 
 
 const catagoryVideo = async (id )=>{
   console.log()
   const catVideoUrl = `https://openapi.programming-hero.com/api/phero-tube/category/${id}`;
+  showLoader()
   const response = await fetch(catVideoUrl);
   const data = await response.json();
   const {category} = data ;
   displayVideo(category);
+  hideLoder();
 }
 
 
 
 
-
+showLoader()
+hideLoder();
 
 const displayCatagory = (catagories)=>{
   const catagoryButtons = document.getElementById("catagory");
